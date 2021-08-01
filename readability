@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<cs50.h>
+#include<string.h>
+#include<math.h>
+int main(void)
+{
+    string s = get_string("Text : ");
+    int letters = 0, words = 0, sentences = 0;
+    for(int i=0, n = strlen(s); i<n; ++i)
+    {
+        if((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+        {
+            letters++;
+        }
+        else
+        if(s[i] == ' ')
+        {
+            words++;
+        }
+        else
+        if(s[i] == '.' || s[i] == '?' || s[i] == '!')
+         {
+             sentences++;
+         }
+    }
+    words++;
+    float l = ( (float) letters/words ) * 100.0;
+    float se = ( (float)sentences / words) * 100.0;
+    //printf("%f %f \n", l, se);
+    float grade = 0.0588 * l - 0.296 * se - 15.8;
+    int ans = round(grade);
+    if(ans >= 16)
+    printf("Grade 16+\n");
+    else
+    if(ans < 1)
+    printf("Before Grade 1\n");
+    else
+    printf("Grade %d\n", ans);
+}
